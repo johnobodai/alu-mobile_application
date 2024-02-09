@@ -18,12 +18,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      debugShowCheckedModeBanner: false, // Remove the debug banner
       initialRoute: '/',
       routes: {
-        '/': (context) => LandingPage(),
+        '/': (context) => const LandingPage(),
         '/sign_up': (context) => SignUpScreen(),
         '/log_in': (context) => LogInScreen(),
-        '/home': (context) => HomeScreen(),
+        '/home': (context) => const HomeScreen(),
         '/camera': (context) => CameraScreen(),
         '/result': (context) => ResultScreen(),
       },
