@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'home_screen.dart'; // Import the home screen file
 
 class LogInScreen extends StatelessWidget {
   const LogInScreen({super.key});
@@ -70,6 +71,12 @@ class LogInScreen extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {
                     // Placeholder for log in action
+                    // Navigate to the home screen
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const HomeScreen()),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor:
