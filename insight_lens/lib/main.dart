@@ -7,10 +7,12 @@ import 'camera_screen.dart';
 import 'result_screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,11 +24,11 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const LandingPage(),
-        '/sign_up': (context) => SignUpScreen(),
-        '/log_in': (context) => LogInScreen(),
+        '/sign_up': (context) => const SignUpScreen(),
+        '/log_in': (context) => const LogInScreen(),
         '/home': (context) => const HomeScreen(),
-        '/camera': (context) => CameraScreen(),
-        '/result': (context) => ResultScreen(),
+        '/camera': (context) => const CameraScreen(),
+        '/result': (context) => const ResultScreen(),
       },
     );
   }
