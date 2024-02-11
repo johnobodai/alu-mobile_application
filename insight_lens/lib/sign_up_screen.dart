@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:insight_lens/home_screen.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -62,7 +62,6 @@ class SignUpScreen extends StatelessWidget {
                     labelText: 'Confirm Password',
                   ),
                 ),
-                
                 const SizedBox(height: 30),
                 ElevatedButton(
                   onPressed: () {
@@ -73,11 +72,9 @@ class SignUpScreen extends StatelessWidget {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        Colors.blue,
+                    backgroundColor: Colors.blue,
                     shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.circular(20.0),
+                      borderRadius: BorderRadius.circular(20.0),
                     ),
                   ),
                   child: const Padding(
@@ -92,11 +89,9 @@ class SignUpScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 OutlinedButton(
-                  onPressed: () {
-                  },
+                  onPressed: () {},
                   style: OutlinedButton.styleFrom(
-                    backgroundColor: Colors
-                        .white,
+                    backgroundColor: Colors.white,
                     side: const BorderSide(color: Colors.blue),
                   ),
                   child: const Padding(
@@ -104,9 +99,7 @@ class SignUpScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.person,
-                            color: Colors
-                                .blue),
+                        Icon(Icons.person, color: Colors.blue),
                         SizedBox(width: 8),
                         Text(
                           'Sign in with google account',
@@ -125,8 +118,7 @@ class SignUpScreen extends StatelessWidget {
                   children: [
                     const Text("Already have an account?"),
                     TextButton(
-                      onPressed: () {
-                      },
+                      onPressed: () {},
                       child: const Text(
                         'Sign In',
                         style: TextStyle(

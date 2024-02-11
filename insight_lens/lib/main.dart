@@ -21,9 +21,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false, // Remove the debug banner
-      initialRoute: '/',
+      home: const LandingPage(), // Set LandingPage as the home page
       routes: {
-        '/': (context) => const LandingPage(),
         '/sign_up': (context) => const SignUpScreen(),
         '/log_in': (context) => const LogInScreen(),
         '/home': (context) => const HomeScreen(),
