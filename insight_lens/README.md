@@ -27,3 +27,4 @@ git clone https://github.com/johnobodai/alu-mobile_application.git
 
 4. Run the app:
 
+Link to prototype: https://www.figma.com/file/INFCaZXQ3U4oKlYnUwyEbr/Mobile-dev-assignment-2?type=design&node-id=0%3A1&mode=design&t=PfG2m0oHCUWj1jMe-1
