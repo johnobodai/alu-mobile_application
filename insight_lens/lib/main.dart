@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
         '/camera': (context) => const CameraScreen(),
         '/result': (context) => ResultScreen(),
       },
+
       //home: ResultScreen(),
       //home: CameraScreen(),
     );
