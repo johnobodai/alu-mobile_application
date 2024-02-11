@@ -3,15 +3,15 @@ import 'landing_page.dart';
 import 'sign_up_screen.dart';
 import 'log_in_screen.dart';
 import 'home_screen.dart';
-import 'camera_screen.dart';
 import 'result_screen.dart';
+import 'camera_screen.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +23,14 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false, // Remove the debug banner
       initialRoute: '/',
       routes: {
-        '/': (context) => const LandingPage(),
         '/sign_up': (context) => const SignUpScreen(),
         '/log_in': (context) => const LogInScreen(),
         '/home': (context) => const HomeScreen(),
         '/camera': (context) => const CameraScreen(),
-        '/result': (context) => const ResultScreen(),
+        '/result': (context) => ResultScreen(),
       },
+      //home: ResultScreen(),
+      //home: CameraScreen(),
     );
   }
 }
