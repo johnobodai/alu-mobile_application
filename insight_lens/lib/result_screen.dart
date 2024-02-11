@@ -14,8 +14,7 @@ class ResultScreen extends StatelessWidget {
            
             child: Image.asset(
               'assets/pineaple.jpg',
-              // Remove the style property from Image.asset
-              // as it is not applicable
+              
             ),
           ),
           Container(
@@ -23,7 +22,7 @@ class ResultScreen extends StatelessWidget {
             padding: EdgeInsets.all(16.0),
             margin: EdgeInsets.only(left: 10.0, right: 10.0),
             child: Text(
-              '''Your result text herePineapple, a tropical delight cherished for its vibrant sweetness and tanginess, serves as a nutrient-rich powerhouse abundant in vitamin C and manganese. Its versatile applications enhance both sweet and savory dishes, while the presence of bromelain supports digestion and offers anti-inflammatory properties. Despite these advantages, it's important to note potential drawbacks, including a relatively high sugar content, acidity that might pose challenges for some individuals, and the risk of allergies or sensitivity to bromelain.''',
+              '''Pineapple, a tropical delight cherished for its vibrant sweetness and tanginess, serves as a nutrient-rich powerhouse abundant in vitamin C and manganese. Its versatile applications enhance both sweet and savory dishes, while the presence of bromelain supports digestion and offers anti-inflammatory properties. Despite these advantages, it's important to note potential drawbacks, including a relatively high sugar content, acidity that might pose challenges for some individuals, and the risk of allergies or sensitivity to bromelain.''',
               style: TextStyle(
                 fontSize: 15.0,
                 color: Colors.black,
@@ -33,7 +32,7 @@ class ResultScreen extends StatelessWidget {
           SizedBox(height: 20.0),
           ElevatedButton(
             onPressed: () {
-              // Your button action here
+              // button action here
             },
             child: Text(
               'Scan',
