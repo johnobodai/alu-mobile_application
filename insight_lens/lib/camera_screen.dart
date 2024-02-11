@@ -59,7 +59,7 @@ class _CameraScreenState extends State<CameraScreen> {
                   try {
                     await _initializeControllerFuture;
                     final XFile file = await _controller.takePicture();
-                    // Do something with the captured image file
+                    // Will do something with the captured image file
                   } catch (e) {
                     print('Error: $e');
                   }
