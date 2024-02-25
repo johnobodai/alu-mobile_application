@@ -43,7 +43,7 @@ class ResultScreen extends StatelessWidget {
               ),
             ),
             style: ElevatedButton.styleFrom(
-              primary: Colors.blue,
+              backgroundColor: Colors.blue,
               padding: EdgeInsets.symmetric(horizontal: 100, vertical: 20),
               textStyle: TextStyle(
                 fontSize: 20,
