@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "175084968444",
-    "project_id": "insightlens-dbc83",
-    "storage_bucket": "insightlens-dbc83.appspot.com"
+    "project_number": "1043533322866",
+    "project_id": "insightlens-646a6",
+    "storage_bucket": "insightlens-646a6.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:175084968444:android:41d24e0132f0b9b9d6fa79",
+        "mobilesdk_app_id": "1:1043533322866:android:8b97149a4d5e4fcdccc0eb",
         "android_client_info": {
           "package_name": "com.example.insight_lens"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBjJPT7STc26d54pJaFMPo1x435e8zTCkw"
+          "current_key": "AIzaSyD_ww2wXwFYdzfwzOJ5iZ7LugUkLdYcL5w"
         }
       ],
       "services": {

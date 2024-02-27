@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '1.9.0' // Specify the Kotlin version here
+    ext.kotlin_version = '1.7.1' // Specify the Kotlin version here
     repositories {
         google()
         mavenCentral()
@@ -13,7 +13,7 @@ buildscript {
 
 // Apply the Google services Gradle plugin
 plugins {
-    id 'com.google.gms.google-services' version '4.4.1'
+    id 'com.google.gms.google-services' version '4.4.1' apply false
 }
 
 // Specify repositories for project dependencies
