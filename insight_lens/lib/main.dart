@@ -7,10 +7,23 @@ import 'package:insight_lens/result_screen.dart';
 import 'package:insight_lens/sign_up_screen.dart';
 import 'landing_page.dart';
 
+//void main() async {
+  //WidgetsFlutterBinding.ensureInitialized();
+//wait Firebase;.initializeApp();
+  //runApp(const MyApp());
+//}//
+var globalMessengerKey = GlobalKey<ScaffoldMessengerState>();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-wait Firebase;.initializeApp();
-  runApp(const MyApp());
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
+
+  ThemeHelper().changeTheme('primary');
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
