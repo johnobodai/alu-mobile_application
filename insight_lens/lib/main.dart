@@ -5,13 +5,14 @@ import 'log_in_screen.dart';
 import 'home_screen.dart';
 import 'result_screen.dart';
 import 'camera_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +28,8 @@ class MyApp extends StatelessWidget {
         '/log_in': (context) => const LogInScreen(),
         '/home': (context) => const HomeScreen(),
         '/camera': (context) => const CameraScreen(),
-        '/result': (context) => ResultScreen(),
+        '/result': (context) => const ResultScreen(),
       },
-
     );
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 
 class CameraScreen extends StatefulWidget {
-  const CameraScreen({Key? key}) : super(key: key);
+  const CameraScreen({super.key});
 
   @override
   _CameraScreenState createState() => _CameraScreenState();
@@ -53,7 +53,6 @@ class _CameraScreenState extends State<CameraScreen> {
         alignment: Alignment
             .bottomCenter, // Align the FloatingActionButton to the bottom center
         child: FloatingActionButton(
-          child: const Icon(Icons.camera_alt),
           onPressed: _controller != null && _controller.value.isInitialized
               ? () async {
                   try {
@@ -65,6 +64,7 @@ class _CameraScreenState extends State<CameraScreen> {
                   }
                 }
               : null,
+          child: const Icon(Icons.camera_alt),
         ),
       ),
     );
