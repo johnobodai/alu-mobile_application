@@ -6,10 +6,13 @@ import 'package:insight_lens/log_in_screen.dart';
 import 'package:insight_lens/result_screen.dart';
 import 'package:insight_lens/sign_up_screen.dart';
 import 'landing_page.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-wait Firebase;.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
