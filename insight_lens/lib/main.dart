@@ -1,19 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/services.dart';
 import 'package:insight_lens/camera_screen.dart';
+import 'package:insight_lens/firebase_options.dart';
 import 'package:insight_lens/home_screen.dart';
 import 'package:insight_lens/log_in_screen.dart';
 import 'package:insight_lens/result_screen.dart';
 import 'package:insight_lens/sign_up_screen.dart';
 import 'landing_page.dart';
-import 'firebase_options.dart';
 
+//void main() async {
+//WidgetsFlutterBinding.ensureInitialized();
+//wait Firebase;.initializeApp();
+//runApp(const MyApp());
+//}//
+var globalMessengerKey = GlobalKey<ScaffoldMessengerState>();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
+
+  ThemeHelper().changeTheme('primary');
+  runApp(MyApp());
+}
+
+class ThemeHelper {
+  void changeTheme(String s) {}
 }
 
 class MyApp extends StatelessWidget {
