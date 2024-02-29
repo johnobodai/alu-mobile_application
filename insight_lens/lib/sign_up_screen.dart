@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:insight_lens/home_screen.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -6,6 +7,53 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController _usernameController = TextEditingController();
+    final TextEditingController _emailController = TextEditingController();
+    final TextEditingController _passwordController = TextEditingController();
+    final TextEditingController _confirmPasswordController =
+        TextEditingController();
+
+    Future<void> _submitForm() async {
+      String username = _usernameController.text.trim();
+      String email = _emailController.text.trim();
+      String password = _passwordController.text.trim();
+      String confirmPassword = _confirmPasswordController.text.trim();
+
+      if (username.isEmpty ||
+          email.isEmpty ||
+          password.isEmpty ||
+          confirmPassword.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Please fill in all fields')),
+        );
+        return;
+      }
+
+      if (password != confirmPassword) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Passwords do not match')),
+        );
+        return;
+      }
+
+      try {
+        await FirebaseFirestore.instance.collection('users').add({
+          'username': username,
+          'email': email,
+          'password': password,
+        });
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const HomeScreen()),
+        );
+      } catch (error) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error: $error')),
+        );
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Sign Up'),
@@ -37,12 +85,14 @@ class SignUpScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 30),
                 TextFormField(
+                  controller: _usernameController,
                   decoration: const InputDecoration(
                     labelText: 'Username',
                   ),
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
+                  controller: _emailController,
                   obscureText: true,
                   decoration: const InputDecoration(
                     labelText: 'Email',
@@ -50,6 +100,7 @@ class SignUpScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
+                  controller: _passwordController,
                   obscureText: true,
                   decoration: const InputDecoration(
                     labelText: 'Password',
@@ -57,6 +108,7 @@ class SignUpScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
+                  controller: _confirmPasswordController,
                   obscureText: true,
                   decoration: const InputDecoration(
                     labelText: 'Confirm Password',
@@ -64,13 +116,8 @@ class SignUpScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 30),
                 ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const HomeScreen()),
-                    );
-                  },
+                  onPressed:
+                      _submitForm, // Call _submitForm when button is pressed
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue,
                     shape: RoundedRectangleBorder(
