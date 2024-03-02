@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,62 +15,50 @@ class HomeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(
-                  Icons.cloud_upload_outlined,
-                  size: 200, // Decreased icon size
-                  color: Color.fromARGB(255, 48, 45, 45), // Icon color
-                ),
-                const SizedBox(height: 10), // Spacer
-                TextButton(
-                  onPressed: () {
-                    // Placeholder for browse action
-                  },
-                  style: TextButton.styleFrom(
-                    backgroundColor:
-                        Colors.grey[300], // Grey background for Browse button
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 16, horizontal: 24), // Adjust button padding
-                    shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.circular(30.0), // Rounded shape
-                    ),
-                  ),
-                  child: const Text(
-                    'Browse',
-                    style: TextStyle(fontSize: 24), // Increased text size
-                  ),
-                ),
-              ],
+            const Icon(
+              Icons.cloud_upload_outlined,
+              size: 200,
+              color: Color.fromARGB(255, 48, 45, 45),
             ),
-            const SizedBox(height: 120), // Space between buttons
-            SizedBox(
-              width: MediaQuery.of(context).size.width *
-                  0.7, // Scan button spans 70% of the width
-              child: ElevatedButton.icon(
-                onPressed: () {
-                  // Placeholder for scan action
-                },
-                icon: const Icon(
-                  Icons.camera_alt,
-                  size: 48, // Increased icon size
-                ),
-                label: const Text(
-                  'Scan',
-                  style: TextStyle(fontSize: 24), // Increased text size
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor:
-                      Colors.blue, // Blue background for the Scan button
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 16, horizontal: 24), // Adjust button padding
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0), // Rounded shape
-                  ),
-                ),
+            const SizedBox(height: 10),
+            const Text(
+              'Welcome',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
               ),
+            ),
+            const SizedBox(height: 10),
+            StreamBuilder<QuerySnapshot>(
+              stream:
+                  FirebaseFirestore.instance.collection('users').snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return CircularProgressIndicator();
+                }
+                if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                }
+                final users = snapshot.data?.docs ?? [];
+
+                // Find the first document where email matches the signed-in user's email
+                final currentUserDoc = users.firstWhere(
+                  (doc) =>
+                      doc['Email'] ==
+                      'current_user_email_here', // Replace with the user's email
+                  orElse: () => null,
+                );
+
+                if (currentUserDoc == null) {
+                  return Text('User data not found');
+                }
+
+                final username = currentUserDoc['Username'] ?? 'Unknown';
+                return Text(
+                  'Hello, $username!',
+                  style: const TextStyle(fontSize: 20),
+                );
+              },
             ),
           ],
         ),
