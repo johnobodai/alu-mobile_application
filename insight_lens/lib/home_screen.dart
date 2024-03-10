@@ -34,20 +34,15 @@ class HomeScreen extends StatelessWidget {
                   FirebaseFirestore.instance.collection('users').snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
+                  return const CircularProgressIndicator();
                 }
                 if (snapshot.hasError) {
                   return Text('Error: ${snapshot.error}');
                 }
                 final users = snapshot.data?.docs ?? [];
 
-                // Find the first document where email matches the signed-in user's email
-                final currentUserDoc = users.firstWhere(
-                  (doc) =>
-                      doc['Email'] ==
-                      'current_user_email_here', // Replace with the user's email
-                  orElse: () => null,
-                );
+                // Get the first document
+                final currentUserDoc = users.isNotEmpty ? users[0] : null;
 
                 if (currentUserDoc == null) {
                   return Text('User data not found');
