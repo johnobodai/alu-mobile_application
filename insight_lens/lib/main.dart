@@ -25,8 +25,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      debugShowCheckedModeBanner: false, // Remove the debug banner
-      home: CrudScreen(), // Set CrudScreen as the home page
+      debugShowCheckedModeBanner: false,
+      initialRoute: '/sign_up', // Specify the initial route
       routes: {
         '/sign_up': (context) => const SignUpScreen(),
         '/log_in': (context) => const LogInScreen(),

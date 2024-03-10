@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
-import 'home_screen.dart'; // Import the home screen file
+import 'package:insight_lens/home_screen.dart';
+import 'package:insight_lens/auth_service.dart'; // Import AuthService
+import 'sign_up_screen.dart';
 
 class LogInScreen extends StatelessWidget {
-  const LogInScreen({super.key});
+  const LogInScreen({Key? key});
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Log In'),
@@ -14,7 +19,7 @@ class LogInScreen extends StatelessWidget {
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),
           child: SizedBox(
-            width: MediaQuery.of(context).size.width * 0.8, // Limit form width
+            width: MediaQuery.of(context).size.width * 0.8,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -23,7 +28,7 @@ class LogInScreen extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
-                    color: Colors.blue, // Blue color for the first Log In text
+                    color: Colors.blue,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -37,12 +42,14 @@ class LogInScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 30),
                 TextFormField(
+                  controller: emailController,
                   decoration: const InputDecoration(
                     labelText: 'Email',
                   ),
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
+                  controller: passwordController,
                   obscureText: true,
                   decoration: const InputDecoration(
                     labelText: 'Password',
@@ -52,10 +59,8 @@ class LogInScreen extends StatelessWidget {
                 Row(
                   children: [
                     Checkbox(
-                      value: false, // Placeholder for "Keep me logged in"
-                      onChanged: (value) {
-                        // Handle checkbox change
-                      },
+                      value: false,
+                      onChanged: (value) {},
                     ),
                     const Text('Keep me logged in'),
                     const Spacer(),
@@ -69,21 +74,33 @@ class LogInScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 30),
                 ElevatedButton(
-                  onPressed: () {
-                    // Placeholder for log in action
-                    // Navigate to the home screen
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const HomeScreen()),
+                  onPressed: () async {
+                    String email = emailController.text.trim();
+                    String password = passwordController.text.trim();
+
+                    // Call login method from AuthService
+                    String? result = await AuthService().login(
+                      email: email, // Use the entered email
+                      password: password, // Use the entered password
                     );
+
+                    if (result == 'Success') {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HomeScreen(),
+                        ),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text(result ?? 'Error during login')),
+                      );
+                    }
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        Colors.blue, // Blue color for the first Log In button
+                    backgroundColor: Colors.blue,
                     shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.circular(20.0), // Cylindrical shape
+                      borderRadius: BorderRadius.circular(20.0),
                     ),
                   ),
                   child: const Padding(
@@ -98,28 +115,38 @@ class LogInScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 OutlinedButton(
-                  onPressed: () {
-                    // Placeholder for sign in with another icon action
+                  onPressed: () async {
+                    // Sign in with Google
+                    String? result = await AuthService().signInWithGoogle();
+                    if (result == 'Success') {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HomeScreen(),
+                        ),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text(result ?? 'Error during Google sign-in')),
+                      );
+                    }
                   },
                   style: OutlinedButton.styleFrom(
-                    backgroundColor: Colors
-                        .white, // White background for the second Log In button
-                    side: const BorderSide(color: Colors.blue), // Blue border
+                    backgroundColor: Colors.white,
+                    side: const BorderSide(color: Colors.blue),
                   ),
                   child: const Padding(
                     padding: EdgeInsets.symmetric(vertical: 14),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.person,
-                            color: Colors
-                                .blue), // Placeholder icon with blue color
+                        Icon(Icons.person, color: Colors.blue),
                         SizedBox(width: 8),
                         Text(
-                          'Sign in with google account',
+                          'Sign in with Google account',
                           style: TextStyle(
                             fontSize: 18,
-                            color: Colors.blue, // Blue color for the text
+                            color: Colors.blue,
                           ),
                         ),
                       ],
@@ -133,7 +160,13 @@ class LogInScreen extends StatelessWidget {
                     const Text("Don't have an account?"),
                     TextButton(
                       onPressed: () {
-                        // Placeholder for navigation to sign up screen
+                        // Navigate to the login screen
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SignUpScreen(),
+                          ),
+                        );
                       },
                       child: const Text(
                         'Sign Up',
