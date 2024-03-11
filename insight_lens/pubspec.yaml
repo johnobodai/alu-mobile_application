@@ -39,6 +39,10 @@ dependencies:
   camera: ^0.9.4+5
   firebase_core: ^2.16.0
   cloud_firestore: ^4.9.3
+  firebase_auth: ^4.16.0
+  google_sign_in: ^6.2.1
+  firebase_ui_auth: ^1.13.0
+
 
 dev_dependencies:
   flutter_test:
@@ -93,3 +97,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+fonts:
+  - family: SocialIcons
+    fonts:
+      - asset: packages/firebase_ui_auth/fonts/SocialIcons.ttf

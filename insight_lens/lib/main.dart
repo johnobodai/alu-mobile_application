@@ -1,38 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'crudscreen.dart'; // Importing the CrudScreen
-import 'package:insight_lens/firebase_options.dart';
-import 'landing_page.dart';
-import 'sign_up_screen.dart';
-import 'log_in_screen.dart';
-import 'home_screen.dart';
-import 'result_screen.dart';
-import 'camera_screen.dart';
-
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  runApp(MyApp());
-}
+import 'package:firebase_auth/firebase_auth.dart' hide EmailAuthProvider;
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final providers = [EmailAuthProvider()];
+
     return MaterialApp(
-      title: 'InsightLens',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      debugShowCheckedModeBanner: false, // Remove the debug banner
-      home: CrudScreen(), // Set CrudScreen as the home page
+      initialRoute:
+          FirebaseAuth.instance.currentUser == null ? '/sign-in' : '/profile',
       routes: {
-        '/sign_up': (context) => const SignUpScreen(),
-        '/log_in': (context) => const LogInScreen(),
-        '/home': (context) => const HomeScreen(),
-        '/camera': (context) => const CameraScreen(),
-        '/result': (context) => ResultScreen(),
+        '/sign-in': (context) {
+          return SignInScreen(
+            providers: providers,
+            actions: [
+              AuthStateChangeAction<SignedIn>((context, state) {
+                Navigator.pushReplacementNamed(context, '/profile');
+              }),
+            ],
+          );
+        },
+        '/profile': (context) {
+          return ProfileScreen(
+            providers: providers,
+            actions: [
+              SignedOutAction((context) {
+                Navigator.pushReplacementNamed(context, '/sign-in');
+              }),
+            ],
+          );
+        },
       },
     );
   }

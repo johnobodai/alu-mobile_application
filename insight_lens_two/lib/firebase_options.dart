@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -25,7 +28,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -43,39 +49,20 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyB7bXdPVnDsIQt1nP5kelUKhcBYb445qf0',
-    appId: '1:139194513211:web:617e0ce82d33a86123291e',
-    messagingSenderId: '139194513211',
-    projectId: 'insightlens-f1f6e',
-    authDomain: 'insightlens-f1f6e.firebaseapp.com',
-    storageBucket: 'insightlens-f1f6e.appspot.com',
-    measurementId: 'G-RGF5EFVVX4',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBOqSaxTlN6k-tRzp6IWDHURJ6u_MHaV1E',
-    appId: '1:139194513211:android:7dd0a574a8db321e23291e',
-    messagingSenderId: '139194513211',
-    projectId: 'insightlens-f1f6e',
-    storageBucket: 'insightlens-f1f6e.appspot.com',
+    apiKey: 'AIzaSyDT6aNEnj8_j0MgDAYNdZRkLXLu-m7vmLg',
+    appId: '1:670644123471:android:1c8cc580a0639ef73cb73a',
+    messagingSenderId: '670644123471',
+    projectId: 'insight-lens-two',
+    storageBucket: 'insight-lens-two.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAtkcXWB2tZV9QcMAzVbdRB8khsBsSLydU',
-    appId: '1:139194513211:ios:bd6c1ef35a09360223291e',
-    messagingSenderId: '139194513211',
-    projectId: 'insightlens-f1f6e',
-    storageBucket: 'insightlens-f1f6e.appspot.com',
-    iosBundleId: 'com.example.insightLens',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyAtkcXWB2tZV9QcMAzVbdRB8khsBsSLydU',
-    appId: '1:139194513211:ios:dae6601ce3a8a47f23291e',
-    messagingSenderId: '139194513211',
-    projectId: 'insightlens-f1f6e',
-    storageBucket: 'insightlens-f1f6e.appspot.com',
-    iosBundleId: 'com.example.insightLens.RunnerTests',
+    apiKey: 'AIzaSyBD1SZAutn4RWBkpt0u81EziUodzmNJBJQ',
+    appId: '1:670644123471:ios:6d073727c14dc8893cb73a',
+    messagingSenderId: '670644123471',
+    projectId: 'insight-lens-two',
+    storageBucket: 'insight-lens-two.appspot.com',
+    iosBundleId: 'com.example.insightLensTwo',
   );
 }

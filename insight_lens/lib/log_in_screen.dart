@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'home_screen.dart'; // Import the home screen file
 
 class LogInScreen extends StatelessWidget {
-  const LogInScreen({super.key});
+  const LogInScreen({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +101,9 @@ class LogInScreen extends StatelessWidget {
                 const SizedBox(height: 20),
                 OutlinedButton(
                   onPressed: () {
+                    print('Hello Google');
                     // Placeholder for sign in with another icon action
+                    signInWithGoogle(context);
                   },
                   style: OutlinedButton.styleFrom(
                     backgroundColor: Colors
@@ -116,7 +120,7 @@ class LogInScreen extends StatelessWidget {
                                 .blue), // Placeholder icon with blue color
                         SizedBox(width: 8),
                         Text(
-                          'Sign in with google account',
+                          'Sign in with Google account',
                           style: TextStyle(
                             fontSize: 18,
                             color: Colors.blue, // Blue color for the text
@@ -150,5 +154,37 @@ class LogInScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void signInWithGoogle(BuildContext context) async {
+    try {
+      GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      if (googleUser != null) {
+        GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
+        final credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
+
+        UserCredential userCredential =
+            await FirebaseAuth.instance.signInWithCredential(credential);
+
+        print(userCredential.user!.displayName);
+
+        // Navigate to the home screen after successful sign-in
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const HomeScreen()),
+        );
+      } else {
+        // Handle sign-in failure
+        print('Sign in with Google failed');
+      }
+    } catch (e) {
+      // Handle sign-in failure
+      print('Error signing in with Google: $e');
+    }
   }
 }

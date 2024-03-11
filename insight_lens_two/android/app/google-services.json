@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "670644123471",
+    "project_id": "insight-lens-two",
+    "storage_bucket": "insight-lens-two.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:670644123471:android:1c8cc580a0639ef73cb73a",
+        "android_client_info": {
+          "package_name": "com.example.insight_lens_two"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDT6aNEnj8_j0MgDAYNdZRkLXLu-m7vmLg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
