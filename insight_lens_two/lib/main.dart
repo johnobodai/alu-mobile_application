@@ -1,28 +1,35 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import '/controllers/user_controller.dart';
 import '/firebase_options.dart';
-import 'pages/home_page.dart';
+import '/pages/home_page.dart';
+import '/pages/login_page.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  runApp(const MyApp());
+  try {
+    await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform);
+  } catch (e) {
+    print('Error initializing Firebase: $e');
+  }
+  runApp(const MainApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MainApp extends StatelessWidget {
+  const MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        colorSchemeSeed: Colors.deepOrange,
+        textTheme: GoogleFonts.montserratTextTheme(),
       ),
-      home: HomePage(),
+      home:
+          UserController.user != null ? const HomeScreen() : const LoginPage(),
     );
   }
 }
