@@ -43,6 +43,8 @@ dependencies:
   google_fonts: ^6.2.1
   iconly: ^1.0.1
   cloud_firestore: ^4.14.0
+  mockito: ^5.4.4
+  camera: ^0.10.5+9
 
 
 dev_dependencies:
@@ -99,3 +101,5 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
   assets:
     - assets/
+    - assets/images/land_img.png
+    - assets/images/pineaple.jpg

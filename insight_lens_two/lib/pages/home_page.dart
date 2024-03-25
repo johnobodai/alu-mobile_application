@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/pages/login_page.dart';
+import './login_page.dart';
 import '../controllers/user_controller.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -79,8 +79,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 16, horizontal: 24),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
                   ),

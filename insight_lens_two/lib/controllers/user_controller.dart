@@ -2,50 +2,69 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class UserController {
-  static User? user = FirebaseAuth.instance.currentUser;
+  static final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  static User? get user => _firebaseAuth.currentUser;
 
   static Future<User?> loginWithGoogle() async {
-    final googleAccount = await GoogleSignIn().signIn();
+    try {
+      final googleSignIn = GoogleSignIn();
+      final googleAccount = await googleSignIn.signIn();
 
-    final googleAuth = await googleAccount?.authentication;
+      if (googleAccount != null) {
+        final googleAuth = await googleAccount.authentication;
 
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken,
-      idToken: googleAuth?.idToken,
-    );
+        final credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
 
-    final userCredential = await FirebaseAuth.instance.signInWithCredential(
-      credential,
-    );
-    return userCredential.user;
+        final userCredential =
+            await _firebaseAuth.signInWithCredential(credential);
+        return userCredential.user;
+      }
+
+      return null; // Return null if signIn() returns null
+    } catch (e) {
+      print("Failed to sign in with Google: $e");
+      rethrow; // Rethrow the exception for handling at higher level
+    }
   }
 
   static Future<User?> signUpWithEmailAndPassword(
       String email, String password) async {
     try {
-      final userCredential = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password);
+      final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
       return userCredential.user;
-    } on FirebaseAuthException catch (e) {
-      print("Failed to sign up with email and password: ${e.message}");
-      throw e;
+    } catch (e) {
+      print("Failed to sign up with email and password: $e");
+      rethrow;
     }
   }
 
   static Future<User?> loginWithEmailAndPassword(
       String email, String password) async {
     try {
-      final userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
+      final userCredential = await _firebaseAuth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
       return userCredential.user;
-    } on FirebaseAuthException catch (e) {
-      print("Failed to sign in with email and password: ${e.message}");
-      throw e;
+    } catch (e) {
+      print("Failed to sign in with email and password: $e");
+      rethrow;
     }
   }
 
   static Future<void> signOut() async {
-    await FirebaseAuth.instance.signOut();
-    await GoogleSignIn().signOut();
+    try {
+      await _firebaseAuth.signOut();
+      await GoogleSignIn().signOut();
+    } catch (e) {
+      print("Failed to sign out: $e");
+      rethrow;
+    }
   }
 }

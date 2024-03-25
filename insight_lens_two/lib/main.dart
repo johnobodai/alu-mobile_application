@@ -5,6 +5,9 @@ import '/firebase_options.dart';
 import '/pages/home_page.dart';
 import '/pages/login_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+import './pages/landing_page.dart';
+import './pages/result_screen.dart';
+import './pages/camera_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,8 +31,10 @@ class MainApp extends StatelessWidget {
         colorSchemeSeed: Colors.deepOrange,
         textTheme: GoogleFonts.montserratTextTheme(),
       ),
-      home:
-          UserController.user != null ? const HomeScreen() : const LoginPage(),
+      home: UserController.user != null
+          ? const HomeScreen()
+          : const LandingPage(),
+      //home: const CameraScreen(),
     );
   }
 }

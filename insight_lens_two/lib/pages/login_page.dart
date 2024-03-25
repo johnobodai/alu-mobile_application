@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '/controllers/user_controller.dart';
+import '../controllers/user_controller.dart';
 import 'package:iconly/iconly.dart';
 
 import 'home_page.dart';

@@ -4,7 +4,7 @@ import 'home_page.dart';
 import 'login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '/controllers/user_controller.dart';
+import '../controllers/user_controller.dart';
 import 'package:iconly/iconly.dart';
 
 class SignUpScreen extends StatefulWidget {
