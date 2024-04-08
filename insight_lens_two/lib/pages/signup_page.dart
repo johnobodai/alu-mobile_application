@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'home_page.dart';
 import 'login_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
 import '../controllers/user_controller.dart';
 import 'package:iconly/iconly.dart';
 
@@ -104,25 +101,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const SizedBox(height: 30),
                 FilledButton.tonalIcon(
                   onPressed: () async {
-                    try {
-                      final user = await UserController.loginWithGoogle();
-                      if (user != null && mounted) {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => const HomeScreen()));
-                      }
-                    } on FirebaseAuthException catch (error) {
-                      print(error.message);
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text(
-                        error.message ?? "Something went wrong",
-                      )));
-                    } catch (error) {
-                      print(error);
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text(
-                        error.toString(),
-                      )));
-                    }
+                    // Handle Google sign-in
                   },
                   icon: const Icon(IconlyLight.login),
                   label: const Text("Continue with Google"),
@@ -183,24 +162,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     try {
       await UserController.signUpWithEmailAndPassword(email, password);
-      await FirebaseFirestore.instance.collection('users').add({
-        'username': username,
-        'email': email,
-        'password': password,
-      });
-
+      // Add other necessary actions here
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const HomeScreen()),
       );
-    } on FirebaseAuthException catch (error) {
-      print(error.message);
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(
-          error.message ?? "Something went wrong",
-        ),
-        backgroundColor: Colors.red, // Set the background color to red
-      ));
     } catch (error) {
       print(error);
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(

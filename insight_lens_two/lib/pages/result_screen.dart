@@ -1,6 +1,16 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 
 class ResultScreen extends StatelessWidget {
+  final File imageFile;
+  final String generatedText;
+
+  const ResultScreen({
+    required this.imageFile,
+    required this.generatedText,
+    Key? key,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,10 +21,8 @@ class ResultScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-            child: Image.asset(
-              'assets/images/pineaple.jpg',
-              // Remove the style property from Image.asset
-              // as it is not applicable
+            child: Image.file(
+              imageFile,
             ),
           ),
           Container(
@@ -22,7 +30,7 @@ class ResultScreen extends StatelessWidget {
             padding: EdgeInsets.all(16.0),
             margin: EdgeInsets.only(left: 10.0, right: 10.0),
             child: Text(
-              '''Your result text herePineapple, a tropical delight cherished for its vibrant sweetness and tanginess, serves as a nutrient-rich powerhouse abundant in vitamin C and manganese. Its versatile applications enhance both sweet and savory dishes, while the presence of bromelain supports digestion and offers anti-inflammatory properties. Despite these advantages, it's important to note potential drawbacks, including a relatively high sugar content, acidity that might pose challenges for some individuals, and the risk of allergies or sensitivity to bromelain.''',
+              generatedText,
               style: TextStyle(
                 fontSize: 15.0,
                 color: Colors.black,

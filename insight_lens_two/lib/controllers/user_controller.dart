@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class UserController {
-  static final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  static late final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   static User? get user => _firebaseAuth.currentUser;
 
   static Future<User?> loginWithGoogle() async {

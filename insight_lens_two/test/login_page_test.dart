@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import '../lib/pages/login_page.dart';
-import '../lib/controllers/user_controller.dart';
+import 'package:insight_lens_two/pages/login_page.dart';
 
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
@@ -10,7 +9,7 @@ void main() {
   testWidgets('Login Page Widget Test', (WidgetTester tester) async {
     // Build the LoginPage widget
     await tester.pumpWidget(
-      MaterialApp(
+      const MaterialApp(
         home: LoginPage(),
       ),
     );
@@ -24,7 +23,7 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
-        home: LoginPage(),
+        home: const LoginPage(),
         navigatorObservers: [mockObserver],
       ),
     );

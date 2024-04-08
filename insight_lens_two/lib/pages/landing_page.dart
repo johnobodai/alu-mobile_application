@@ -53,7 +53,6 @@ class LandingPage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.white,
-                  
                 ),
               ),
               const SizedBox(height: 22),

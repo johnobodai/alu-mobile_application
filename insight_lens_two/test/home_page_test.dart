@@ -4,7 +4,7 @@ import '../lib/pages/home_page.dart';
 
 void main() {
   testWidgets('Home Page Widget Test', (WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(
+    await tester.pumpWidget(const MaterialApp(
       home: HomeScreen(),
     ));
 

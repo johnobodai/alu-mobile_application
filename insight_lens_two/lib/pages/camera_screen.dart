@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 
 class CameraScreen extends StatefulWidget {
-  const CameraScreen({Key? key}) : super(key: key);
+  const CameraScreen({Key? key, required CameraController cameraController}) : super(key: key);
 
   @override
   _CameraScreenState createState() => _CameraScreenState();
@@ -14,7 +14,7 @@ class _CameraScreenState extends State<CameraScreen> {
   late Future<void> _initializeControllerFuture;
 
   @override
-  Future<void> initState() async {
+  void initState() {
     super.initState();
     _initializeCamera();
   }
@@ -28,6 +28,7 @@ class _CameraScreenState extends State<CameraScreen> {
       ResolutionPreset.medium,
     );
     _initializeControllerFuture = _controller.initialize();
+    setState(() {}); // Trigger a rebuild once camera is initialized
   }
 
   @override
@@ -46,7 +47,7 @@ class _CameraScreenState extends State<CameraScreen> {
           if (snapshot.connectionState == ConnectionState.done) {
             return CameraPreview(_controller);
           } else {
-            return const Center(child: CircularProgressIndicator());
+            return Center(child: CircularProgressIndicator());
           }
         },
       ),
@@ -54,26 +55,16 @@ class _CameraScreenState extends State<CameraScreen> {
         alignment: Alignment.bottomCenter,
         child: FloatingActionButton(
           child: const Icon(Icons.camera_alt),
-          onPressed: _controller != null && _controller.value.isInitialized
-              ? () async {
-                  try {
-                    await _initializeControllerFuture;
-                    final XFile file = await _controller.takePicture();
-                    // Do something with the captured image file
-                  } catch (e) {
-                    print('Error: $e');
-                  }
-                }
-              : null,
+          onPressed: () async {
+            try {
+              await _initializeControllerFuture;
+              // Do something with the captured image file
+            } catch (e) {
+              print('Error: $e');
+            }
+          },
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Future<void>>(
-        '_initializeControllerFuture', _initializeControllerFuture));
   }
 }
